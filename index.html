@@ -158,6 +158,34 @@
             background: linear-gradient(135deg, #FF6B00, #ff8533);
             border-radius: 16px 16px 0 0;
             padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-refresh-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chat-refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(180deg);
+        }
+
+        .chat-refresh-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         df-messenger-message {
@@ -245,5 +273,49 @@
             chat-title="Inventronics-FAQ Bot">
         </df-messenger-chat-bubble>
     </df-messenger>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for the custom elements to be defined
+            customElements.whenDefined('df-messenger').then(() => {
+                const dfMessenger = document.querySelector('df-messenger');
+                const shadow = dfMessenger.shadowRoot;
+
+                // Wait for the chat to be ready
+                const checkInterval = setInterval(() => {
+                    const titlebar = shadow.querySelector('df-messenger-titlebar');
+                    if (titlebar) {
+                        clearInterval(checkInterval);
+                        // Add refresh button
+                        const refreshButton = document.createElement('button');
+                        refreshButton.className = 'chat-refresh-btn';
+                        refreshButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>`;
+                        refreshButton.title = 'Refresh Chat';
+                        
+                        // Add click handler
+                        refreshButton.addEventListener('click', () => {
+                            const chat = shadow.querySelector('df-messenger-chat');
+                            if (chat) {
+                                // Clear the chat messages
+                                const messages = chat.shadowRoot.querySelector('.message-list');
+                                if (messages) {
+                                    while (messages.firstChild) {
+                                        messages.removeChild(messages.firstChild);
+                                    }
+                                }
+                                // Trigger the welcome message
+                                dfMessenger.renderCustomText('Hi');
+                            }
+                        });
+
+                        // Insert the button into the titlebar
+                        titlebar.appendChild(refreshButton);
+                    }
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
