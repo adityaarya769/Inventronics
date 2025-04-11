@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventronics - Building a Brighter Future</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #FF6B00;
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .search-box {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-logo {
+            font-size: 5rem;
+            color: #FF6B00;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-tagline {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #FF6B00;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #E65A00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero-logo {
+                font-size: 3rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.8rem;
+            }
+        }
+    /* Chatbot Styles */
+        df-messenger {
+            z-index: 999;
+            position: fixed;
+            --df-messenger-font-color: #333;
+            --df-messenger-font-family: 'Segoe UI', Arial, sans-serif;
+            --df-messenger-chat-background: #fff;
+            --df-messenger-message-user-background: #FF6B00;
+            --df-messenger-message-bot-background: #f8f9fa;
+            --df-messenger-button-titlebar-color: #FF6B00;
+            --df-messenger-button-titlebar-font-color: #fff;
+            --df-messenger-chat-font-color: #333;
+            --df-messenger-input-box-color: #fff;
+            --df-messenger-input-font-color: #333;
+            --df-messenger-input-placeholder-font-color: #666;
+            --df-messenger-send-icon: #FF6B00;
+            --df-messenger-chat-border-radius: 16px;
+            --df-messenger-chat-button-size: 56px;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Custom styles for chat elements */
+        df-messenger-chat {
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-height: 400px !important;
+            height: 400px !important;
+        }
+
+        df-messenger-chat iframe {
+            max-height: 400px !important;
+            height: 400px !important;
+            border-radius: 16px !important;
+        }
+
+        df-messenger-titlebar {
+            background: linear-gradient(135deg, #FF6B00, #ff8533);
+            border-radius: 16px 16px 0 0;
+            padding: 16px;
+        }
+
+        df-messenger-message {
+            margin: 8px 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+        }
+
+        df-messenger-message[agent="user"] {
+            background: linear-gradient(135deg, #FF6B00, #ff8533);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 107, 0, 0.2);
+        }
+
+        df-messenger-message[agent="bot"] {
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        df-messenger-input {
+            border-top: 1px solid #eee;
+            padding: 12px;
+        }
+
+        df-messenger-input input {
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 12px 18px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+
+        df-messenger-input input:focus {
+            border-color: #FF6B00;
+            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.1);
+            outline: none;
+        }
+
+        df-messenger-chat-bubble button {
+            background: linear-gradient(135deg, #FF6B00, #ff8533) !important;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        df-messenger-chat-bubble button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(255, 107, 0, 0.25);
+        }
+    </style>
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">inventronics</a>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <input type="search" placeholder="Search this site..." class="search-box">
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-logo">inventronics</div>
+        <h1 class="hero-tagline">Building a Brighter Future</h1>
+        <a href="#" class="cta-button">Switch LED Drivers</a>
+    </section>
+    <df-messenger
+        project-id="scrapi-development"
+        agent-id="51367431-54a6-47cd-a5df-f89870317c83"
+        language-code="en"
+        max-query-length="-1">
+        <df-messenger-chat-bubble
+            chat-title="Inventronics-FAQ Bot">
+        </df-messenger-chat-bubble>
+    </df-messenger>
+</body>
+</html>
